@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <title>Heart Disease Prediction</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Style.css')}}">
+
+    <style>
+        body {
+            background: #4d0026;
+            background: linear-gradient(to left, #667292 0%, #a2b9bc 100%);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .wrapper {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 600px;
+            overflow-y: scroll;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            background: #3498db;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+        }
+
+        /* Add responsive styles */
+        @media screen and (max-width: 768px) {
+            .wrapper {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+
+            .form-control,
+            .btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>
+        <div style="text-align:center">
+            <font color='white'>
+                Heart Disease Prediction
+            </font>
+        </div>
+        <div>
+            <button><a href='/'>X</a></button>
+        </div>
+    </h1>
+    <br>
+
+
+    <div class="wrapper">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-10 col-sm-6 mx-auto">
+                    <form class="" action="{{ url_for('heart')}}" method="post">
+
+                        <div class="form-group">
+                            <select class="form-control" name="sex" required="required">
+                                <option value="" selected>Select Gender</option>
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age" class="ph-area">Enter Your Age</label>
+                            <input type="number" name="age" id="age" class="form-control" required>
+                        </div>
+
+                       
+
+                        <div class="form-group">
+                            <label for="education" class="ph-area">Enter Education Level</label>
+                            <input type="number" name="education" id="education" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="currentSmoker" required="required">
+                                <option value="" selected>Current Smoker</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cigsPerDay" class="ph-area">Enter Cigarettes Per Day</label>
+                            <input type="number" name="cigsPerDay" id="cigsPerDay" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="BPMeds" required="required">
+                                <option value="" selected>Blood Pressure Medication</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <input type="number" name="prevalentStroke" id="prevalentStroke" class="form-control"
+                                required>
+                            <label for="prevalentStroke" class="ph-area">Prevalent Stroke (1 for Yes, 0 for No)</label>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="prevalentHyp" required="required">
+                                <option value="" selected>Prevalent Hypertension (1 for Yes, 0 for No)</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="diabetes" required="required">
+                                <option value="" selected>Diabetes (1 for Yes, 0 for No)</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="totChol" class="ph-area">Total Cholesterol Level</label>
+                            <input type="number" name="totChol" id="totChol" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sysBP" class="ph-area">Systolic Blood Pressure</label>
+                            <input type="number" name="sysBP" id="sysBP" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="diaBP" class="ph-area">Diastolic Blood Pressure</label>
+                            <input type="number" name="diaBP" id="diaBP" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="BMI" class="ph-area">Body Mass Index (BMI)</label>
+                            <input type="number" name="BMI" id="BMI" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="heartRate" class="ph-area">Heart Rate</label>
+                            <input type="number" name="heartRate" id="heartRate" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" name="glucose" id="glucose" class="form-control" required>
+                            <label for="glucose" class="ph-area">Glucose Level</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="reset" class="btn btn-danger" value="Reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+      
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
