@@ -5,143 +5,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breast Cancer Prediction</title>
     <style>
-        /* style.css */
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background-image: url('../static/br.jpg'); /* Replace 'background.jpg' with your image file */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #333;
-}
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('../static/br.jpg'); /* Replace 'background.jpg' with your image file */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    border-radius: 10px;
-}
+        /* Container Styles */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            height: auto;
+            overflow-y: auto;
+            border: 2px solid #ccc;
+            background-color: rgba(228, 197, 202, 0.97);
+            border-radius: 10px;
+        }
 
-h1 {
-    color: #007bff;
-    text-align: center;
-}
+        /* Heading Styles */
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
+        /* Form Styles */
+        form {
+            width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+        }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #0056b3;
+        }
 
-input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        input[type="text"] {
+            width: calc(100% - 30px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
 
-button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
 
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
 
-/* Additional styles */
+        /* Diagnosis Styles */
+        .diagnosis {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 30px;
+        }
 
-/* Center the form horizontally */
-form {
-    width: 80%; /* Adjust width as needed */
-    margin: 0 auto;
-}
+        /* Close Button Styles */
+        .close-button {
+            text-align: right;
+        }
 
-/* Style the form labels */
-label {
-    font-weight: bold;
-}
+        .close-button a {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
 
-/* Style the submit button */
-button[type="submit"] {
-    display: block;
-    margin: 0 auto;
-    margin-top: 20px; /* Add space between form and button */
-}
-
-/* Style the diagnosis message */
-.diagnosis {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-top: 30px;
-}
-
-
+        .close-button a:hover {
+            background-color: #cc0000;
+        }
+        .fscroll{
+            height:500px;
+            overflow-y: scroll;
+        }
     </style>
 </head>
 <body>
-    <h1>Breast Cancer Prediction</h1>
-    <div>
-        <button><a href='/'>X</a></button>
+    <div class="container">
+        <div class="close-button">
+            <a href='/'>Close</a>
+        </div>
+        <h1>Breast Cancer Prediction</h1>
+        <div class="fscroll">
+        <form action="/cancer" method="post">
+            <label for="radius_mean">Radius Mean:</label>
+            <input type="text" id="radius_mean" name="radius_mean"><br><br>
+            
+            <label for="texture_mean">Texture Mean:</label>
+            <input type="text" id="texture_mean" name="texture_mean"><br><br>
+
+            <label for="smoothness_mean">Smoothness Mean:</label>
+            <input type="text" id="smoothness_mean" name="smoothness_mean"><br><br>
+            
+            <label for="compactness_mean">Compactness Mean:</label>
+            <input type="text" id="compactness_mean" name="compactness_mean"><br><br>
+            
+            <label for="symmetry_mean">Symmetry Mean:</label>
+            <input type="text" id="symmetry_mean" name="symmetry_mean"><br><br>
+            
+            <label for="fractal_dimension_mean">Fractal Dimension Mean:</label>
+            <input type="text" id="fractal_dimension_mean" name="fractal_dimension_mean"><br><br>
+            
+            <label for="radius_se">Radius SE:</label>
+            <input type="text" id="radius_se" name="radius_se"><br><br>
+            
+            <label for="texture_se">Texture SE:</label>
+            <input type="text" id="texture_se" name="texture_se"><br><br>
+            
+            <label for="smoothness_se">Smoothness SE:</label>
+            <input type="text" id="smoothness_se" name="smoothness_se"><br><br>
+            
+            <label for="compactness_se">Compactness SE:</label>
+            <input type="text" id="compactness_se" name="compactness_se"><br><br>
+            
+            <label for="concave_points_se">Concave Points SE:</label>
+            <input type="text" id="concave_points_se" name="concave_points_se"><br><br>
+            
+            <label for="symmetry_se">Symmetry SE:</label>
+            <input type="text" id="symmetry_se" name="symmetry_se"><br><br>
+            
+            <label for="smoothness_worst">Smoothness Worst:</label>
+            <input type="text" id="smoothness_worst" name="smoothness_worst"><br><br>
+            
+            <label for="symmetry_worst">Symmetry Worst:</label>
+            <input type="text" id="symmetry_worst" name="symmetry_worst"><br><br>
+            
+            <label for="fractal_dimension_worst">Fractal Dimension Worst:</label>
+            <input type="text" id="fractal_dimension_worst" name="fractal_dimension_worst"><br><br>
+
+            <button type="submit">Predict</button>
+        </form>
     </div>
-    <form action="/cancer" method="post">
-        <label for="radius_mean">Radius Mean:</label>
-        <input type="text" id="radius_mean" name="radius_mean"><br><br>
         
-        <label for="texture_mean">Texture Mean:</label>
-        <input type="text" id="texture_mean" name="texture_mean"><br><br>
-
-        <label for="smoothness_mean">Smoothness Mean:</label>
-        <input type="text" id="smoothness_mean" name="smoothness_mean"><br><br>
-        
-        <label for="compactness_mean">Compactness Mean:</label>
-        <input type="text" id="compactness_mean" name="compactness_mean"><br><br>
-        
-        <label for="symmetry_mean">Symmetry Mean:</label>
-        <input type="text" id="symmetry_mean" name="symmetry_mean"><br><br>
-        
-        <label for="fractal_dimension_mean">Fractal Dimension Mean:</label>
-        <input type="text" id="fractal_dimension_mean" name="fractal_dimension_mean"><br><br>
-        
-        <label for="radius_se">Radius SE:</label>
-        <input type="text" id="radius_se" name="radius_se"><br><br>
-        
-        <label for="texture_se">Texture SE:</label>
-        <input type="text" id="texture_se" name="texture_se"><br><br>
-        
-        <label for="smoothness_se">Smoothness SE:</label>
-        <input type="text" id="smoothness_se" name="smoothness_se"><br><br>
-        
-        <label for="compactness_se">Compactness SE:</label>
-        <input type="text" id="compactness_se" name="compactness_se"><br><br>
-        
-        <label for="concave_points_se">Concave Points SE:</label>
-        <input type="text" id="concave_points_se" name="concave_points_se"><br><br>
-        
-        <label for="symmetry_se">Symmetry SE:</label>
-        <input type="text" id="symmetry_se" name="symmetry_se"><br><br>
-        
-        <label for="smoothness_worst">Smoothness Worst:</label>
-        <input type="text" id="smoothness_worst" name="smoothness_worst"><br><br>
-        
-        <label for="symmetry_worst">Symmetry Worst:</label>
-        <input type="text" id="symmetry_worst" name="symmetry_worst"><br><br>
-        
-        <label for="fractal_dimension_worst">Fractal Dimension Worst:</label>
-        <input type="text" id="fractal_dimension_worst" name="fractal_dimension_worst"><br><br>
-
-        <button type="submit">Predict</button>
-    </form>
-    <div>
-        <h1>Diagnosis:</h1>
+    </div>
+    <div class="diagnosis">
+        <h2>Diagnosis:</h2>
         <p>{{ diagnosis }}</p>
     </div>
 </body>

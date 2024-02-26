@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
-import pickle,joblib
+import joblib
 import numpy as np
 
 filename = 'rf_model.pkl'
-classifier = pickle.load(open(filename, 'rb'))
+classifier = joblib.load(open(filename, 'rb'))
 heart_model_filename = 'heart_model.pkl'
 try:
     heart_classifier =joblib.load(open(heart_model_filename, 'rb'))
@@ -86,12 +86,10 @@ def cancer():
                                smoothness_worst, symmetry_worst, fractal_dimension_worst]).reshape(1, -1)
         
 
-        # Make prediction
-        prediction = model.predict(input_data)
         
-        # Translate prediction to diagnosis
+        prediction = model.predict(input_data)
+    
         diagnosis = "Malignant" if prediction == 1 else "Benign"
-
         return render_template('cancer.html', diagnosis=diagnosis)
     return render_template('cancer.html')
 
