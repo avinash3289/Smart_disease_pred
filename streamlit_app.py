@@ -46,7 +46,9 @@ def main():
 
     elif choice == 'Heart Disease Prediction':
         st.subheader('Heart Disease Prediction')
-        sex = int(st.selectbox('Sex', ['Male', 'Female']))
+        sex_mapping = {'Male': 0, 'Female': 1}
+        sex = sex_mapping[st.selectbox('Sex', ['Male', 'Female'])]
+
         age = int(st.number_input('Age', value=0))
         education = float(st.number_input('Education', value=0))
         currentSmoker = int(st.selectbox('Current Smoker', ['No', 'Yes']))
