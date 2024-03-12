@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import joblib
 import numpy as np
-
 filename = 'rf_model.pkl'
 classifier = joblib.load(open(filename, 'rb'))
 heart_model_filename = 'heart_model.pkl'
@@ -15,7 +14,7 @@ model=joblib.load(open(cancer_model,'rb'))
 app = Flask(__name__,template_folder='Templates')
 @app.route('/')
 def home():
-    return render_template('/index.html')
+    return render_template('index.html')  # Remove the leading slash
 
 @app.route('/diabetes', methods=['POST', 'GET'])
 def predict():
@@ -88,11 +87,11 @@ def cancer():
 
         
         prediction = model.predict(input_data)
-    
         diagnosis = "Malignant" if prediction == 1 else "Benign"
         return render_template('cancer.html', diagnosis=diagnosis)
     return render_template('cancer.html')
 
     
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=5000)
+    app.run(host='0.0.0.0', port=8000, debug=True)
+
