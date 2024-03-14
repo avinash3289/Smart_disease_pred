@@ -84,6 +84,21 @@
          .fa-twitter{
            color: #0097e6;
          }
+         .close-button {
+          text-align: right;
+      }
+
+      .close-button a {
+          background-color: #ff0000;
+          color: #fff;
+          padding: 5px 10px;
+          text-decoration: none;
+          border-radius: 3px;
+      }
+
+      .close-button a:hover {
+          background-color: #cc0000;
+      }
      </style>
 
   </head>
@@ -107,6 +122,9 @@
      <div class="card" style= "max-width: 500px; margin:0 auto;">
        <div class="card-body">
      <div class="title">
+      <div class="close-button">
+        <a href='/'>Close</a>
+    </div>
         
        <font color='white'>
          <h1>
@@ -114,7 +132,7 @@
             <h1>Prediction: <span class='danger'>Opps! You have HEART❣️ Disease😢.</span></h1>
             <img class="gif" src="{{ url_for('static', filename='diabetes.webp') }}" alt="Diabetes Image">
         {% elif result==0 %}
-            <h1 style="color: #0097e6;">Prediction: <span class='safe'>Wow ! You DON'T have HEART❣️ Disease.</span></h1>
+            <h1 style="color: #94a5ae;">Prediction: <span class='safe'>Wow ! You DON'T have HEART❣️ Disease.</span></h1>
             <img class="gif1" src="{{ url_for('static', filename='ht.jpg') }}" alt="Not Diabetes Image">
         {% endif %}
         </h1>

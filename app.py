@@ -57,7 +57,7 @@ def heart():
         if data.ndim == 1:
          data = data.reshape(1, -1)  
         my_prediction1 = heart_classifier.predict(data)[0]
-        return render_template('result.html', prediction=my_prediction1)
+        return render_template('result.html', result=my_prediction1)
 
     return render_template('heart.html')
 @app.route('/cancer', methods=['GET', 'POST'])
