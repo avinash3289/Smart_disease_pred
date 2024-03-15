@@ -11,7 +11,7 @@ except Exception as e:
     heart_classifier = None
 cancer_model='cancer_model.pkl'
 model=joblib.load(open(cancer_model,'rb'))
-app = Flask(__name__,template_folder='Templates')
+app = Flask(__name__,template_folder='templates')
 @app.route('/')
 def home():
     return render_template('index.html')  # Remove the leading slash
@@ -93,5 +93,5 @@ def cancer():
 
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=3000, debug=True)
 
