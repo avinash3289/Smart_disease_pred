@@ -13,5 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 # Run app.py when the container launches
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+ENTRYPOINT ["python3"]
+CMD ["app.py","runserver","0.0.0.0:3000"]
